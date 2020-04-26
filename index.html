@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="ja_JP">
+    <title>JavaScript課題③</title>
+  </head>
+  <body>
+    <h1 name="title">ToDoリスト</h1>
+    <div id="radioArea">
+      <input type="radio" name="type" value="all" checked>すべて
+      <input type="radio" name="type" value="doing">作業中
+      <input type="radio" name="type" value="comp">完了
+    </div>
+
+    <div id="outputArea">
+      <table id="exe">
+        <tr>
+          <th>ID</th>
+          <th>コメント</th>
+          <th>状態</th>
+        </tr>
+      </table>
+    </div>
+
+    <div id="inputArea">
+      <h2 name="inputTitle">新規タスクの追加</h2>
+      <input id ="comment" type="text" name="comment">
+      <input id="addComment" type="button" value="追加">
+    </div>
+  </body>
+
+  <script>
+    <!-- ボタン -->
+    const addComment = document.getElementById('addComment');
+
+    <!-- 追加先の要素 -->
+    const addTable = document.getElementById("exe");
+
+    <!-- 追加文字列 -->
+    const comment = document.getElementById("comment");
+
+    <!-- ボタン押下動作 -->
+    addComment.addEventListener('click', function() {
+      // 現在の行の長さ(id)
+      len = addTable.rows.length;
+
+      // 表の列用意
+      let row = addTable.insertRow(-1);
+
+      // 列の要素用意
+      let cell1 = row.insertCell(-1);
+      let cell2 = row.insertCell(-1);
+      let cell3 = row.insertCell(-1);
+      let cell4 = row.insertCell(-1);
+
+      // 各要素の値設定
+      cell1.innerHTML = len;
+      cell2.innerHTML = comment.value;
+      cell3.innerHTML = '<input type="button" value="作業中">';
+      cell4.innerHTML = '<input type="button" value="削除">';
+    }, false);
+
+  </script>
+</html>
