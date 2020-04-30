@@ -26,40 +26,54 @@
     <div id="inputArea">
       <h2 name="inputTitle">新規タスクの追加</h2>
       <input id ="comment" type="text" name="comment">
-      <input id="addComment" type="button" value="追加">
+      <button id="addComment">追加</button>
     </div>
   </body>
 
   <script>
-    <!-- ボタン -->
+    // ボタン
     const addComment = document.getElementById('addComment');
 
-    <!-- 追加先の要素 -->
+    // 追加先の要素
     const addTable = document.getElementById("exe");
 
-    <!-- 追加文字列 -->
+    // 追加文字列
     const comment = document.getElementById("comment");
 
-    <!-- ボタン押下動作 -->
+    // ボタン押下動作
     addComment.addEventListener('click', function() {
       // 現在の行の長さ(id)
-      len = addTable.rows.length;
+      const len = addTable.rows.length;
 
       // 表の列用意
       let row = addTable.insertRow(-1);
 
       // 列の要素用意
-      let cell1 = row.insertCell(-1);
-      let cell2 = row.insertCell(-1);
-      let cell3 = row.insertCell(-1);
-      let cell4 = row.insertCell(-1);
+      const cell1 = row.insertCell(-1);
+      const cell2 = row.insertCell(-1);
+      const cell3 = row.insertCell(-1);
+      const cell4 = row.insertCell(-1);
 
-      // 各要素の値設定
-      cell1.innerHTML = len;
-      cell2.innerHTML = comment.value;
-      cell3.innerHTML = '<input type="button" value="作業中">';
-      cell4.innerHTML = '<input type="button" value="削除">';
-    }, false);
+      // 各要素用意
+      let newContent;
+      const button1= document.createElement("button"); 
+      const button2= document.createElement("button"); 
+
+      // dr1:ID
+      newContent = document.createTextNode(len); 
+      cell1.appendChild(newContent);
+      // dr2:コメント
+      newContent = document.createTextNode(comment.value); 
+      cell2.appendChild(newContent);
+      // dr3:ボタン（現在は作業中のみ）
+      newContent = document.createTextNode("作業中"); 
+      button1.appendChild(newContent);
+      cell3.appendChild(button1);
+      // dr4:削除
+      newContent = document.createTextNode("削除"); 
+      button2.appendChild(newContent);
+      cell4.appendChild(button2);
+    });
 
   </script>
 </html>
