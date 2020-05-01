@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="ja_JP">
+    <title>JavaScript課題③</title>
+  </head>
+  <body>
+    <h1 name="title">ToDoリスト</h1>
+    <div id="radioArea">
+      <input type="radio" name="type" value="all" checked>すべて
+      <input type="radio" name="type" value="doing">作業中
+      <input type="radio" name="type" value="comp">完了
+    </div>
+
+    <div id="outputArea">
+      <table id="exe">
+        <tr>
+          <th>ID</th>
+          <th>コメント</th>
+          <th>状態</th>
+        </tr>
+      </table>
+    </div>
+
+    <div id="inputArea">
+      <h2 name="inputTitle">新規タスクの追加</h2>
+      <input id ="comment" type="text" name="comment">
+      <button id="addComment">追加</button>
+    </div>
+  </body>
+
+  <script>
+    // ボタン
+    const addComment = document.getElementById('addComment');
+
+    // 追加先の要素
+    const addTable = document.getElementById("exe");
+
+    // 追加文字列
+    const comment = document.getElementById("comment");
+
+    // ボタン押下動作
+    addComment.addEventListener('click', function() {
+      // 現在の行の長さ(id)
+      const len = addTable.rows.length;
+
+      // 表の列用意
+      let row = addTable.insertRow(-1);
+
+      // 列の要素用意
+      const cell1 = row.insertCell(-1);
+      const cell2 = row.insertCell(-1);
+      const cell3 = row.insertCell(-1);
+      const cell4 = row.insertCell(-1);
+
+      // 各要素用意
+      let newContent;
+      const statusButton = document.createElement("button"); 
+      const deleteButton = document.createElement("button"); 
+
+      // dr1:ID
+      newContent = document.createTextNode(len); 
+      cell1.appendChild(newContent);
+      // dr2:コメント
+      newContent = document.createTextNode(comment.value); 
+      cell2.appendChild(newContent);
+      // dr3:ボタン（現在は作業中のみ）
+      newContent = document.createTextNode("作業中"); 
+      statusButton.appendChild(newContent);
+      cell3.appendChild(statusButton);
+      // dr4:削除
+      newContent = document.createTextNode("削除"); 
+      deleteButton.appendChild(newContent);
+      cell4.appendChild(deleteButton);
+    });
+
+  </script>
+</html>
