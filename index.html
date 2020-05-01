@@ -56,8 +56,8 @@
 
       // 各要素用意
       let newContent;
-      const button1= document.createElement("button"); 
-      const button2= document.createElement("button"); 
+      const statusButton = document.createElement("button"); 
+      const deleteButton = document.createElement("button"); 
 
       // dr1:ID
       newContent = document.createTextNode(len); 
@@ -67,12 +67,12 @@
       cell2.appendChild(newContent);
       // dr3:ボタン（現在は作業中のみ）
       newContent = document.createTextNode("作業中"); 
-      button1.appendChild(newContent);
-      cell3.appendChild(button1);
+      statusButton.appendChild(newContent);
+      cell3.appendChild(statusButton);
       // dr4:削除
       newContent = document.createTextNode("削除"); 
-      button2.appendChild(newContent);
-      cell4.appendChild(button2);
+      deleteButton.appendChild(newContent);
+      cell4.appendChild(deleteButton);
     });
 
   </script>
