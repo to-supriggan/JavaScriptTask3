@@ -31,10 +31,10 @@
   </body>
 
   <script>
-    // ボタン
+    // 追加ボタン
     const addComment = document.getElementById('addComment');
 
-    // 追加先の要素
+    // 追加、削除先の要素
     const addTable = document.getElementById("exe");
 
     // 追加文字列
@@ -58,6 +58,18 @@
       let newContent;
       const statusButton = document.createElement("button"); 
       const deleteButton = document.createElement("button"); 
+
+      // 削除ボタンの動作
+      deleteButton.onclick = function() {
+        // 選択行要素取得
+        const deleteTr = this.parentNode.parentNode;
+        // 選択行削除
+        deleteTr.parentNode.deleteRow(deleteTr.sectionRowIndex);
+        // 番号振り直し
+        for (let rowNum = 1; rowNum <= addTable.rows.length-1; rowNum++) {
+          addTable.rows[rowNum].cells[0].innerText = rowNum;
+        }
+    };
 
       // dr1:ID
       newContent = document.createTextNode(len); 
