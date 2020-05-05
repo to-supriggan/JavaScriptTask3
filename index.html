@@ -60,12 +60,12 @@
       const deleteButton = document.createElement("button"); 
 
       // 状態ボタンの動作
-      if (statusButton != null) {
+      if (statusButton) {
         statusButton.addEventListener('click', function() {
           // 選択行要素取得
           const statusTr = this.parentNode.parentNode;
           // 状態ボタン変更
-          if ("作業中" === statusTr.cells[2].childNodes[0].innerHTML) {
+          if (statusTr.cells[2].childNodes[0].innerHTML === "作業中") {
             statusTr.cells[2].childNodes[0].innerHTML = "完了";
           } else {
             statusTr.cells[2].childNodes[0].innerHTML = "作業中";
@@ -74,7 +74,7 @@
       };
 
       // 削除ボタンの動作
-      if (deleteButton != null) {
+      if (deleteButton) {
         deleteButton.addEventListener('click', function() {
           // 選択行要素取得
           const deleteTr = this.parentNode.parentNode;
