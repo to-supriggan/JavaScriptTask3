@@ -56,20 +56,36 @@
 
       // 各要素用意
       let newContent;
-      const statusButton = document.createElement("button"); 
+      const statusButton = document.createElement("button");
       const deleteButton = document.createElement("button"); 
 
+      // 状態ボタンの動作
+      if (statusButton) {
+        statusButton.addEventListener('click', function() {
+          // 選択行要素取得
+          const statusTr = this.parentNode.parentNode;
+          // 状態ボタン変更
+          if (statusTr.cells[2].childNodes[0].innerHTML === "作業中") {
+            statusTr.cells[2].childNodes[0].innerHTML = "完了";
+          } else {
+            statusTr.cells[2].childNodes[0].innerHTML = "作業中";
+          }
+        });
+      };
+
       // 削除ボタンの動作
-      deleteButton.onclick = function() {
-        // 選択行要素取得
-        const deleteTr = this.parentNode.parentNode;
-        // 選択行削除
-        deleteTr.parentNode.deleteRow(deleteTr.sectionRowIndex);
-        // 番号振り直し
-        for (let rowNum = 1; rowNum <= addTable.rows.length-1; rowNum++) {
-          addTable.rows[rowNum].cells[0].innerText = rowNum;
-        }
-    };
+      if (deleteButton) {
+        deleteButton.addEventListener('click', function() {
+          // 選択行要素取得
+          const deleteTr = this.parentNode.parentNode;
+          // 選択行削除
+          deleteTr.parentNode.deleteRow(deleteTr.sectionRowIndex);
+          // 番号振り直し
+          for (let rowNum = 1; rowNum <= addTable.rows.length-1; rowNum++) {
+            addTable.rows[rowNum].cells[0].innerText = rowNum;
+          }
+        });
+      };
 
       // dr1:ID
       newContent = document.createTextNode(len); 
