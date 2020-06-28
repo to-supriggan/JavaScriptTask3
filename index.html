@@ -121,8 +121,11 @@
 
       // 選択したラジオボタン要素から絞り込み
       for (let tableNum = 0; tableNum < addTable.rows.length; tableNum++) {
-        // 値が設定されていない場合を排除
-        if (addTable.rows[tableNum].cells[2].childNodes[0].value) {
+        // "all"の場合は全ての行を出力する
+        if (str === "all") {
+          addTable.rows[tableNum].style.display = "";
+        } else if (addTable.rows[tableNum].cells[2].childNodes[0].value) {
+          // 値が設定されていない場合を排除
           if (addTable.rows[tableNum].cells[2].childNodes[0].value === str) {
             addTable.rows[tableNum].style.display = "";
           } else {
