@@ -7,11 +7,11 @@
   </head>
   <body>
     <h1 name="title">ToDoリスト</h1>
-    <div id="radioArea">
+    <form id="radioArea">
       <input type="radio" name="type" value="all" checked>すべて
       <input type="radio" name="type" value="doing">作業中
       <input type="radio" name="type" value="comp">完了
-    </div>
+    </form>
 
     <div id="outputArea">
       <table id="exe">
@@ -40,6 +40,9 @@
     // 追加文字列
     const comment = document.getElementById("comment");
 
+    // ラジオボタン
+    const radioButton = document.getElementById("radioArea");
+
     // ボタン押下動作
     addComment.addEventListener('click', function() {
       // 現在の行の長さ(id)
@@ -67,8 +70,10 @@
           // 状態ボタン変更
           if (statusTr.cells[2].childNodes[0].innerHTML === "作業中") {
             statusTr.cells[2].childNodes[0].innerHTML = "完了";
+            statusTr.cells[2].childNodes[0].value = "comp";
           } else {
             statusTr.cells[2].childNodes[0].innerHTML = "作業中";
+            statusTr.cells[2].childNodes[0]
           }
         });
       };
@@ -96,11 +101,38 @@
       // dr3:ボタン（現在は作業中のみ）
       newContent = document.createTextNode("作業中"); 
       statusButton.appendChild(newContent);
+      statusButton.value = "doing";
       cell3.appendChild(statusButton);
       // dr4:削除
       newContent = document.createTextNode("削除"); 
       deleteButton.appendChild(newContent);
       cell4.appendChild(deleteButton);
+    });
+
+    // ラジオボタンを選択
+    radioButton.addEventListener('click', function() {
+      let str;
+      // 選択したラジオボタン要素を取得
+      Array.from(radioButton).forEach(function(radioParam) {
+        if(radioParam.checked){
+          str = radioParam.value;
+        }
+      });
+
+      // 選択したラジオボタン要素から絞り込み
+      for (let tableNum = 0; tableNum < addTable.rows.length; tableNum++) {
+        // "all"の場合は全ての行を出力する
+        if (str === "all") {
+          addTable.rows[tableNum].style.display = "";
+        } else if (addTable.rows[tableNum].cells[2].childNodes[0].value) {
+          // 値が設定されていない場合を排除
+          if (addTable.rows[tableNum].cells[2].childNodes[0].value === str) {
+            addTable.rows[tableNum].style.display = "";
+          } else {
+            addTable.rows[tableNum].style.display = "none";
+          }
+        }
+      }
     });
 
   </script>
